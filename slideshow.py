@@ -15,7 +15,7 @@ class SlideShowApp(object):
         self.tk.bind('<Escape>', self.end_fullscreen)
         
         self.current_date = None
-        self.base_dir = 'Images/Master'
+        self.base_dir = 'Images'        #Base directory for your images
         self.group_static = {
                              1: {
                                  'category': 'daily_context', 'method': 'draw',
@@ -45,8 +45,8 @@ class SlideShowApp(object):
                                  }
                             }
         
-        self.group_annual = {}
-        self.group_scheduled = {}
+        self.group_annual = {}      #placeholder for future slides
+        self.group_scheduled = {}   #placeholder for futer slides
         
         self.group_seasonal = {
                                1: {
@@ -83,7 +83,7 @@ class SlideShowApp(object):
         self.weather_last_update = None
         self.weather_update_frequency = datetime.timedelta(seconds=3600)
         self.weather_cache = None
-        self.weather_api_path = 'http://api.openweathermap.org/data/2.5/weather?zip=77034,us&units=imperial&APPID=ae0d9df00d07b7bf21b5e020e1fcdbe8'
+        self.weather_api_path = 'http://api.openweathermap.org/data/2.5/weather?zip=77034,us&units=imperial&APPID=bf21b5e020e1fcdbe8' #replace 77034 with your zip code
         self.weather_types = ['Thunderstorm', 'Drizzle', 'Rain', 'Snow']
         self.weather_cloud_types = {
                800 : 'Clear',
@@ -179,8 +179,8 @@ class SlideShowApp(object):
         pass
             
     def slideshow(self):
-        #now = datetime.date.today()
-        now = datetime.date(2015, 7, 11)
+        now = datetime.date.today()
+        #now = datetime.date(2015, 7, 11)        #use for testing different date ranges
         if not self.current_date or now != self.current_date:
             self.current_date = now
             self.update_eligible_slides()
@@ -251,6 +251,5 @@ class SlideShowApp(object):
 
 if __name__ == '__main__':
     w = SlideShowApp()
-    #w.draw_rectangle()
     w.slideshow()
     w.tk.mainloop()    
